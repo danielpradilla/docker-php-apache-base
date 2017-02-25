@@ -68,6 +68,16 @@ RUN apt-get update \
 # Install iconv
 RUN docker-php-ext-install iconv
 
+# Install memcached
+RUN apt-get update \
+    && apt-get install -y memcached php5-memcached libmemcached-dev zlib1g-dev \
+    && pecl install memcached-2.2.0 \
+    && docker-php-ext-enable memcached
+
+# Install vim
+RUN apt-get update \
+    && apt-get install -y vim
+
 # Define PHP_TIMEZONE env variable
 ENV PHP_TIMEZONE UTC
 
